@@ -1,0 +1,96 @@
+<div class='body-container'>
+  <app-header></app-header>
+  <div class='md-container-main md-container-layout'>
+    <div class='space-y-12'>
+      <div class='quick-view space-y-6'>
+        <div class='flex items-center justify-between overflow-x-auto whitespace-nowrap'>
+          <div class='flex items-center space-x-2'>
+            <div class='rounded-sm bg-c w-2 h-6'></div>
+            <span class='t-subtitle text-st-90'>Vista Rápida</span>
+          </div>
+          <div>
+            <button class="b-small h-8" (click)="getAllWork()">
+              <i class="pi pi-refresh" style="font-size: 1rem"></i>
+              <span>Actualizar</span>
+            </button>
+          </div>
+        </div>
+        <div class='md-card-default p-6 flex-col md:flex-row flex items-center gap-6 overflow-x-auto'>
+          <app-card-chart label='Validados' value="15"
+                          percentage="12%" type='success'
+                          icon='pi-check-circle'>
+          </app-card-chart>
+          <app-card-chart label='Pendientes' value="15"
+                          percentage="12" type='warning'
+                          icon='pi-clock'/>
+          <app-card-chart label='No Iniciados' value="15"
+                          percentage="15%"
+                          type=' border-st-60 text-st-60'
+                          icon='pi-calendar-minus'>
+          </app-card-chart>
+          <app-card-chart label='Rechazados' value="15"
+                          percentage="15%" type='error'
+                          icon='pi-times-circle'>
+          </app-card-chart>
+          <div
+            class='w-full md:w-fit md:h-40 border-t-2 md:border-t-0 md:border-l-2 border-st-20'></div>
+          <app-card-chart label='Total' value="15" percentage='100%'
+                          type=' border-c text-c'
+                          icon='pi-chart-bar'>
+          </app-card-chart>
+          <app-card-chart label='Expirados' value="15"
+                          percentage="15%"
+                          type='border-st-40 text-st-40'
+                          icon='pi-calendar-times'>
+          </app-card-chart>
+        </div>
+        <div class='flex flex-col md:flex-row gap-6 md:flex-wrap'>
+          <div class='md-card-default md-card-dash'>
+            <div class='md-card-dash-icon'>
+              <i class="pi pi-user" style="font-size: 1.5rem"></i>
+            </div>
+            <span class='md-card-dash-label'>Pendientes de Selfie (Prueba de Vida)</span>
+            <span class='md-card-dash-value'>12</span>
+          </div>
+          <div class='md-card-default md-card-dash'>
+            <div class='md-card-dash-icon'>
+              <i class="pi pi-book" style="font-size: 1.5rem"></i>
+            </div>
+            <span class='md-card-dash-label'>Pendientes de Documento de Identificación</span>
+            <span class='md-card-dash-value'>12</span>
+          </div>
+          <div class='md-card-default md-card-dash'>
+            <div class='md-card-dash-icon'>
+              <i class="pi pi-id-card" style="font-size: 1.5rem"></i>
+            </div>
+            <span class='md-card-dash-label'>Pendientes de Información Personal</span>
+            <span class='md-card-dash-value'>12</span>
+          </div>
+        </div>
+      </div>
+      <div class='activity space-y-6'>
+        <div class='flex items-center space-y-12 justify-between overflow-x-auto whitespace-nowrap'>
+          <div class='flex items-center space-x-2'>
+            <div class='rounded-sm bg-c w-2 h-6'></div>
+            <span class='t-subtitle text-st-90'>Actividad Reciente</span>
+          </div>
+          <div class='flex space-x-2'>
+            <button class="b-small h-8" routerLink="/admin/requests">
+              <i class="pi pi-table" style="font-size: 1rem"></i>
+              <span>Ver todo</span>
+            </button>
+            <button class="b-small h-8" (click)="getAllWork()">
+              <i class="pi pi-refresh" style="font-size: 1rem"></i>
+              <span>Actualizar</span>
+            </button>
+          </div>
+        </div>
+        <app-table [data]="work"></app-table>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>
+
+<app-block-page [show]="blockPage"></app-block-page>
+<app-toast></app-toast>

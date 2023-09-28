@@ -1,0 +1,32 @@
+.md-table-default {
+  @apply w-full
+}
+
+.md-table-default td .md-td-state-warning {
+  @apply flex items-center space-x-2 text-alert-warning;
+}
+
+.md-table-default td .md-td-state-success {
+  @apply flex items-center space-x-2 text-alert-success;
+}
+
+.md-table-default td .md-td-state-error {
+  @apply flex items-center space-x-2 text-alert-error;
+}
+
+
+.md-table-default td {
+  @apply p-2
+}
+
+.md-table-default tbody td {
+  @apply border-l border-r border-st-20
+}
+
+.md-table-default tbody tr:nth-child(odd) {
+  @apply bg-st-5
+}
+
+.md-table-default tbody tr {
+  @apply hover:bg-st-20
+}

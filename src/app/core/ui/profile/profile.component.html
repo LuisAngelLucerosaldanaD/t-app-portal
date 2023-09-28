@@ -1,0 +1,277 @@
+<div class="w-full flex flex-col lg:flex-row gap-6 md:gap-12">
+  <div class='space-y-6 lg:space-y-12 flex-1'>
+    <div class='flex justify-between flex-col md:flex-row gap-4'>
+      <div class='panel-a space-x-4 flex items-center'>
+        <div
+          class='photo md-card-default relative text-st-20 h-40 w-40 flex items-center flex-col justify-center'>
+          <div>
+            <ng-template [ngIf]="user.selfie_img === ''" [ngIfElse]="selfie">
+              <svg class='fill-current' width="96" height="96" viewBox="0 0 96 96"
+                   fill="none"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M48 8C36.9543 8 28 16.9543 28 28C28 39.0457 36.9543 48 48 48C59.0457 48 68 39.0457 68 28C68 16.9543 59.0457 8 48 8ZM24.4998 55.9999C19.8065 55.9999 16 59.8025 16 64.4978L16 66C16 73.5111 19.8833 79.1338 25.8403 82.7604C31.6982 86.3266 39.5721 88 48 88C56.4279 88 64.3018 86.3266 70.1597 82.7604C76.1166 79.1338 80 73.5111 80 66L80 64.4974C79.9999 59.8023 76.1935 55.9999 71.5004 55.9999H24.4998Z"/>
+              </svg>
+            </ng-template>
+            <ng-template #selfie>
+              <img src="{{GetFullSrcImg(userSelfie)}}"
+                   alt="{{user.first_name ? user.first_name + ' ' + user.second_surname : 'user img'}}"
+                   class='w-24 h-24'/>
+            </ng-template>
+
+          </div>
+          <app-full-screen [src]="GetFullSrcImg(userSelfie)" *ngIf="user.selfie_img"
+                           [name]="user && user.first_name ? user.first_name + ' ' + user.second_surname : 'user selfie'">
+          </app-full-screen>
+        </div>
+        <div class='space-y-2 flex-1'>
+          <div class='flex items-center space-x-1 t-label-b w-full'>
+            <ng-template [ngIf]="user.transaction_id" [ngIfElse]="trx">
+              <div class='text-alert-success flex items-center gap-0.5'>
+                <i class="pi pi-check-circle" style="font-size: 1rem"></i>
+                <span>CUENTA VALIDADA</span>
+              </div>
+            </ng-template>
+            <ng-template #trx>
+              <div class='text-alert-warning flex items-center gap-0.5'>
+                <i class="pi pi-exclamation-triangle" style="font-size: 1rem"></i>
+                <span>CUENTA NO VALIDADA</span>
+              </div>
+            </ng-template>
+          </div>
+          <div class='flex flex-col t-title text-st-90 w-full'>
+            <span>{{user.first_name ? (user.first_name + " " + user.second_name).trim() : 'Sin nombre'}}</span>
+            <span>{{user.first_surname ? (user.first_surname + " " + user.second_surname).trim() : 'Sin apellido'}}</span>
+          </div>
+          <div class='t-label text-st-60 w-full'>
+            <span>{{user.email}}</span>
+          </div>
+        </div>
+        <div *ngIf="!user.transaction_id && user.process_url !== ''" class="flex flex-col gap-4 items-center justify-center">
+          <div class="qrcodeImage">
+            <qrcode
+              [qrdata]="'https://github.com/Cordobo/angularx-qrcode'"
+              [allowEmptyString]="true"
+              [cssClass]="'center'"
+              [colorDark]="'#000000ff'"
+              [colorLight]="'#ffffffff'"
+              [elementType]="'canvas'"
+              [errorCorrectionLevel]="'M'"
+              [imageSrc]="'/assets/favicon.ico'"
+              [imageHeight]="65"
+              [imageWidth]="65"
+              [margin]="4"
+              [scale]="1"
+              [width]="200"
+            ></qrcode>
+          </div>
+          <div class='t-label text-st-60'>
+            <span>Link de proceso de enrolamiento</span>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="userID && !user.transaction_id" class='flex space-x-6 justify-end items-center'>
+        <button
+                class='border-2 t-subtitle bg-white-p border-alert-error text-alert-error h-12 hover:bg-alert-error hover:text-st-5 rounded px-4 disabled:bg-st-20 disabled:text-st-40 disabled:border-none flex items-center gap-1 justify-center'>
+          <i class="pi pi-times" style="font-size: 1.5rem"></i>
+          <span>Rechazar</span>
+        </button>
+        <button
+                class='border-2 t-subtitle bg-white-p border-alert-success text-alert-success h-12 hover:bg-alert-success hover:text-st-5 rounded px-4 disabled:bg-st-20 disabled:text-st-40 disabled:border-none flex items-center gap-1 justify-center'>
+          <i class="pi pi-check-circle" style="font-size: 1.5rem"></i>
+          <span>Aprobar</span>
+        </button>
+      </div>
+    </div>
+    <div class='border-t-2 border-st-20 w-full'></div>
+    <div class='flex flex-col md:flex-row gap-6 lg:gap-12'>
+      <div class='panel-b flex flex-col items-center md:w-fit space-y-6'>
+        <div
+          class='card-a md-card-default relative w-80 h-52 text-st-20 flex flex-col items-center justify-center'>
+          <div>
+            <ng-template [ngIf]="user.front_document_img" [ngIfElse]="documentFront">
+              <img src="{{GetFullSrcImg(userDocumentFront)}}" alt="document front"
+                   style="width: 280px; height: 149px"/>
+            </ng-template>
+            <ng-template #documentFront>
+              <svg class='fill-current' width="230" height="124" viewBox="0 0 230 124"
+                   fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M150 4C150 1.79086 151.791 0 154 0H200C202.209 0 204 1.79086 204 4V12C204 14.2091 202.209 16 200 16H154C151.791 16 150 14.2091 150 12V4Z"/>
+                <path
+                  d="M104 76C104 73.7909 105.791 72 108 72H154C156.209 72 158 73.7909 158 76V84C158 86.2091 156.209 88 154 88H108C105.791 88 104 86.2091 104 84V76Z"/>
+                <path
+                  d="M105 40C105 37.7909 106.791 36 109 36H136C138.209 36 140 37.7909 140 40V48C140 50.2091 138.209 52 136 52H109C106.791 52 105 50.2091 105 48V40Z"/>
+                <path
+                  d="M150 40C150 37.7909 151.791 36 154 36H181C183.209 36 185 37.7909 185 40V48C185 50.2091 183.209 52 181 52H154C151.791 52 150 50.2091 150 48V40Z"/>
+                <path
+                  d="M168 76C168 73.7909 169.791 72 172 72H199C201.209 72 203 73.7909 203 76V84C203 86.2091 201.209 88 199 88H172C169.791 88 168 86.2091 168 84V76Z"/>
+                <path
+                  d="M195 40C195 37.7909 196.791 36 199 36H226C228.209 36 230 37.7909 230 40V48C230 50.2091 228.209 52 226 52H199C196.791 52 195 50.2091 195 48V40Z"/>
+                <path
+                  d="M105 4C105 1.79086 106.791 0 109 0H136C138.209 0 140 1.79086 140 4V12C140 14.2091 138.209 16 136 16H109C106.791 16 105 14.2091 105 12V4Z"/>
+                <path
+                  d="M105 112C105 109.791 106.791 108 109 108H207C209.209 108 211 109.791 211 112V120C211 122.209 209.209 124 207 124H109C106.791 124 105 122.209 105 120V112Z"/>
+                <path
+                  d="M32 22C20.9543 22 12 30.9543 12 42C12 53.0457 20.9543 62 32 62C43.0457 62 52 53.0457 52 42C52 30.9543 43.0457 22 32 22ZM8.49975 69.9999C3.80651 69.9999 4.1008e-05 73.8025 5.48363e-06 78.4978L0 80C0 87.5111 3.88335 93.1338 9.84033 96.7604C15.6982 100.327 23.5721 102 32 102C40.4279 102 48.3018 100.327 54.1597 96.7604C60.1166 93.1338 64 87.5111 64 80L64 78.4974C63.9999 73.8023 60.1935 69.9999 55.5004 69.9999H8.49975Z"/>
+              </svg>
+            </ng-template>
+          </div>
+          <app-full-screen *ngIf="user && user.front_document_img"
+                           [src]="GetFullSrcImg(userDocumentFront)"
+                           [name]="user && user.first_name ? user.first_name + ' ' + user.second_surname : 'user document front'">
+          </app-full-screen>
+        </div>
+        <div
+          class='card-b md-card-default relative w-80 h-52 text-st-20 flex flex-col items-center justify-center'>
+          <div>
+            <ng-template [ngIf]="user.back_document_img" [ngIfElse]="documentBack">
+              <img src="{{GetFullSrcImg(user.back_document_img || '')}}" alt="document back"
+                   style="width: 280px; height: 149px"/>
+            </ng-template>
+            <ng-template #documentBack>
+              <svg class='fill-current' width="280" height="149" viewBox="0 0 280 149"
+                   fill="none"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M173 106C173 103.791 174.791 102 177 102H223C225.209 102 227 103.791 227 106V114C227 116.209 225.209 118 223 118H177C174.791 118 173 116.209 173 114V106Z"/>
+                <path
+                  d="M109 106C109 103.791 110.791 102 113 102H159C161.209 102 163 103.791 163 106V114C163 116.209 161.209 118 159 118H113C110.791 118 109 116.209 109 114V106Z"/>
+                <path
+                  d="M0 106C0 103.791 1.79086 102 4 102H50C52.2091 102 54 103.791 54 106V114C54 116.209 52.2091 118 50 118H4C1.79086 118 0 116.209 0 114V106Z"/>
+                <path
+                  d="M117 137C117 134.791 118.791 133 121 133H148C150.209 133 152 134.791 152 137V145C152 147.209 150.209 149 148 149H121C118.791 149 117 147.209 117 145V137Z"/>
+                <path
+                  d="M162 137C162 134.791 163.791 133 166 133H193C195.209 133 197 134.791 197 137V145C197 147.209 195.209 149 193 149H166C163.791 149 162 147.209 162 145V137Z"/>
+                <path
+                  d="M64 106C64 103.791 65.7909 102 68 102H95C97.2091 102 99 103.791 99 106V114C99 116.209 97.2091 118 95 118H68C65.7909 118 64 116.209 64 114V106Z"/>
+                <path
+                  d="M207 137C207 134.791 208.791 133 211 133H276C278.209 133 280 134.791 280 137V145C280 147.209 278.209 149 276 149H211C208.791 149 207 147.209 207 145V137Z"/>
+                <path
+                  d="M237 106C237 103.791 238.791 102 241 102H276C278.209 102 280 103.791 280 106V114C280 116.209 278.209 118 276 118H241C238.791 118 237 116.209 237 114V106Z"/>
+                <path
+                  d="M1 137C1 134.791 2.79086 133 5 133H103C105.209 133 107 134.791 107 137V145C107 147.209 105.209 149 103 149H5C2.79086 149 1 147.209 1 145V137Z"/>
+                <path
+                  d="M226.872 7.85268C230.353 5.84457 235.268 4.82551 240.411 5.03136C245.543 5.23676 250.646 6.65218 254.497 9.22831C255.53 9.91915 256.928 9.64184 257.618 8.60892C258.309 7.57601 258.032 6.17864 256.999 5.48781C252.31 2.35133 246.353 0.76558 240.591 0.53496C234.84 0.304795 229.026 1.41488 224.623 3.95481C223.547 4.57577 223.178 5.95172 223.799 7.02809C224.419 8.10446 225.795 8.47364 226.872 7.85268ZM242.562 9.19169C241.331 9.01891 240.193 9.87641 240.021 11.107C239.848 12.3376 240.705 13.4752 241.936 13.648C250.471 14.8464 255.541 19.6924 258.592 24.666C261.68 29.6987 262.644 34.7931 262.849 36.1015C263.041 37.3292 264.192 38.1686 265.42 37.9764C266.648 37.7841 267.487 36.6331 267.295 35.4054C267.047 33.8261 265.959 28.0678 262.428 22.3127C258.861 16.4984 252.745 10.6215 242.562 9.19169ZM232.244 24.9467C226.755 29.3672 223.513 38.9325 229.469 51.2727C230.009 52.3918 229.54 53.7369 228.421 54.277C227.301 54.8171 225.956 54.3478 225.416 53.2287C218.746 39.4086 221.977 27.4376 229.422 21.4419C233.106 18.4755 237.765 17.054 242.487 17.7309C247.228 18.4106 251.819 21.1731 255.433 26.1814C256.16 27.189 255.933 28.5954 254.925 29.3225C253.918 30.0497 252.511 29.8223 251.784 28.8146C248.788 24.6629 245.226 22.6696 241.848 22.1854C238.451 21.6984 235.028 22.705 232.244 24.9467ZM239.216 54.26C235.507 46.6346 234.432 40.2619 235.133 36.1039C235.48 34.0471 236.23 32.6939 237.125 31.9008C237.979 31.1438 239.184 30.7009 240.913 30.8648C243.24 31.0855 244.272 31.8327 244.898 32.6665C245.651 33.6673 246.074 35.104 246.557 37.2739C246.616 37.5388 246.675 37.8113 246.736 38.0905C247.618 42.1545 248.809 47.6373 254.383 51.8805C255.371 52.6331 256.783 52.4417 257.536 51.453C258.289 50.4642 258.097 49.0525 257.108 48.2999C252.885 45.0849 252.009 41.1043 251.102 36.9866L251.102 36.9833C251.051 36.7546 251.001 36.5247 250.949 36.2952C250.488 34.2234 249.913 31.8473 248.495 29.9622C246.952 27.91 244.642 26.6982 241.337 26.3849C238.557 26.1213 236.061 26.8306 234.14 28.5328C232.26 30.1988 231.159 32.6118 230.696 35.3553C229.778 40.7978 231.246 48.1623 235.17 56.2284C235.713 57.3459 237.06 57.8111 238.177 57.2676C239.295 56.724 239.76 55.3775 239.216 54.26ZM221.412 9.43858C222.251 10.3549 222.189 11.7782 221.273 12.6175C218.525 15.1347 216.816 17.9276 216.286 18.861C215.674 19.942 214.3 20.3216 213.219 19.7088C212.138 19.096 211.759 17.7229 212.372 16.6418C213.018 15.5023 214.999 12.2616 218.233 9.29915C219.15 8.45982 220.573 8.52224 221.412 9.43858ZM258.711 35.7083C258.481 34.4872 257.305 33.6837 256.084 33.9138C254.863 34.1439 254.059 35.3204 254.289 36.5415C255.129 40.9966 257.188 44.7199 260.943 47.0391C262 47.6922 263.387 47.3645 264.04 46.3073C264.693 45.2501 264.365 43.8637 263.308 43.2106C260.901 41.7239 259.383 39.2725 258.711 35.7083ZM240.215 35.7515C241.453 35.6476 242.541 36.5672 242.645 37.8055C243.324 45.8925 247.359 51.0014 248.464 52.2586C249.284 53.192 249.193 54.6137 248.259 55.434C247.326 56.2543 245.904 56.1626 245.084 55.2292C243.637 53.583 238.951 47.5951 238.161 38.1817C238.057 36.9434 238.977 35.8554 240.215 35.7515ZM234.141 14.3506C235.282 13.8562 235.805 12.5312 235.31 11.3911C234.816 10.2511 233.491 9.72774 232.351 10.2222C222.053 14.6884 217.337 22.2949 215.299 29.1437C213.285 35.9111 213.877 41.9342 214.09 43.5514C214.253 44.7833 215.384 45.65 216.616 45.4873C217.848 45.3245 218.714 44.1938 218.552 42.9619C218.377 41.6421 217.855 36.3337 219.612 30.4271C221.345 24.6018 225.285 18.1917 234.141 14.3506Z"/>
+              </svg>
+            </ng-template>
+          </div>
+          <app-full-screen *ngIf="user && user.back_document_img" [src]="GetFullSrcImg(user.back_document_img || '')"
+                           [name]="user && user.first_name ? user.first_name + ' ' + user.second_surname : 'user document back'">
+          </app-full-screen>
+        </div>
+      </div>
+
+      <div *ngIf="!user.document_number"
+           class='panel-c md-card-default md:flex-1 p-12 flex items-center justify-center h-[440px]'>
+        <div class='flex flex-col space-y-4 items-center text-center'>
+          <span class='t-subtitle text-st-60'>Información Personal No Registrada</span>
+          <button class="b-solid" (click)="navigateValidation()">
+            <i class="pi pi-send" style="font-size: 1rem"></i>
+            <span>Ir a Validar Mi Cuenta</span>
+          </button>
+        </div>
+      </div>
+
+      <ng-template [ngIf]="user.document_number">
+        <div class='panel-c md-card-default md:flex-1 p-6 h-[440px]'>
+          <div class='grid grid-cols-2 gap-4'>
+            <div class='data flex w-full flex-col space-y-1'>
+              <span class='t-overline-b text-c'>Nombres</span>
+              <span class='t-body text-st-90'>
+                {{(user.first_name + " " + user.second_name).trim()}}
+              </span>
+            </div>
+            <div class='data flex w-full flex-col space-y-1'>
+              <span class='t-overline-b text-c'>Apellidos</span>
+              <span class='t-body text-st-90'>
+                {{(user.first_surname + " " + user.second_surname).trim()}}
+              </span>
+            </div>
+          </div>
+          <div class='grid grid-cols-2 gap-4'>
+            <div class='data flex w-full flex-col space-y-1'>
+              <span class='t-overline-b text-c'>Tipo Documento</span>
+              <span class='t-body text-st-90'>{{user.type_document || '-'}}</span>
+            </div>
+            <div class='data flex w-full flex-col space-y-1'>
+              <span class='t-overline-b text-c'>Número Documento</span>
+              <span class='t-body text-st-90'>{{user.document_number}}</span>
+            </div>
+          </div>
+          <div class='grid grid-cols-2 gap-4'>
+            <div class='data flex w-full flex-col space-y-1'>
+              <span class='t-overline-b text-c'>Edad</span>
+              <span class='t-body text-st-90'>
+                {{user.age || '-'}}
+              </span>
+            </div>
+            <div class='data flex w-full flex-col space-y-1'>
+              <span class='t-overline-b text-c'>Sexo</span>
+              <span class='t-body text-st-90'>
+                {{user.gender || '-'}}
+              </span>
+            </div>
+          </div>
+          <div class='grid grid-cols-2 gap-4'>
+            <div class='data flex w-full flex-col space-y-1'>
+              <span class='t-overline-b text-c'>Fecha de expedición</span>
+              <span class='t-body text-st-90'>
+                {{user.cellphone}}
+              </span>
+            </div>
+            <div class='data flex w-full flex-col space-y-1'>
+              <span class='t-overline-b text-c'>Fecha de nacimiento</span>
+              <span class='t-body text-st-90'>
+                {{user.birth_date | date: 'medium': 'UTC'}}
+              </span>
+            </div>
+          </div>
+          <div class='grid grid-cols-2 gap-4'>
+            <div class='data flex w-full flex-col space-y-1'>
+              <span class='t-overline-b text-c'>Estado Civil</span>
+              <span class='t-body text-st-90'>
+                {{user.real_ip || '-'}}
+              </span>
+            </div>
+            <div class='data flex w-full flex-col space-y-1'>
+              <span class='t-overline-b text-c'>Nacionalidad</span>
+              <span class='t-body text-st-90'>
+                {{user.nationality || '-'}}
+              </span>
+            </div>
+          </div>
+          <div class='grid grid-cols-2 gap-4'>
+            <div class='data flex w-full flex-col space-y-1'>
+              <span class='t-overline-b text-c'>Pais</span>
+              <span class='t-body text-st-90'>
+                {{user.country || '-'}}
+              </span>
+            </div>
+            <div class='data flex w-full flex-col space-y-1'>
+              <span class='t-overline-b text-c'>Departamento</span>
+              <span class='t-body text-st-90'>
+                {{user.department || '-'}}
+              </span>
+            </div>
+          </div>
+          <div class='grid grid-cols-2 gap-4'>
+            <div class='data flex w-full flex-col space-y-1'>
+              <span class='t-overline-b text-c'>Ciudad</span>
+              <span class='t-body text-st-90'>
+                {{user.city || '-'}}
+              </span>
+            </div>
+            <div class='data flex w-full flex-col space-y-1'>
+              <span class='t-overline-b text-c'>Fecha de registro</span>
+              <span class='t-body text-st-90'>
+               {{user.created_at | date: 'medium': 'UTC'}}
+              </span>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <app-activity-history [tracking]="tracking"></app-activity-history>
+</div>

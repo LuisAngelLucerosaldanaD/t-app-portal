@@ -1,0 +1,23 @@
+.md-header {
+  @apply flex items-center space-x-4 justify-between overflow-x-auto w-full h-16 whitespace-nowrap;
+}
+
+.container-header {
+  @apply w-full bg-white-p border-b-2 border-st-20;
+}
+
+.hdr-left {
+  @apply flex items-center space-x-4;
+}
+
+.hdr-right {
+  @apply flex items-center space-x-4;
+}
+
+.md-nav {
+  @apply flex items-center space-x-4;
+}
+
+.md-nav button {
+  @apply cursor-pointer hover:text-c;
+}

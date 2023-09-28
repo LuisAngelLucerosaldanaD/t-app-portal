@@ -1,0 +1,20 @@
+<div (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()"
+     [@messageState]="{ value: 'visible', params: { showTransformParams: showTransformOptions, hideTransformParams: hideTransformOptions, showTransitionParams: showTransitionOptions, hideTransitionParams: hideTransitionOptions } }"
+     class="flex items-center space-x-4 bg-white rounded-lg border ml-auto border-zc-50 p-4 drop-shadow-lg"
+     style="max-width: 400px;">
+  <ng-container [ngSwitch]="message.type">
+    <div *ngSwitchCase="'info'" class="info stroke-current text-alert-info">
+      <i class="pi pi-exclamation-circle" style="font-size: 1.5rem"></i>
+    </div>
+    <div *ngSwitchCase="'success'" class="success stroke-current text-alert-success">
+      <i class="pi pi-check-circle" style="font-size: 1.5rem"></i>
+    </div>
+    <div *ngSwitchCase="'warning'" class="warning stroke-current text-alert-warning">
+      <i class="pi pi-exclamation-triangle" style="font-size: 1.5rem"></i>
+    </div>
+    <div *ngSwitchDefault class="error stroke-current text-alert-error">
+      <i class="pi pi-times-circle" style="font-size: 1.5rem"></i>
+    </div>
+  </ng-container>
+  <span class="text-zc-600 t-body">{{message.message}}</span>
+</div>

@@ -1,0 +1,55 @@
+<div class="w-full h-screen flex flex-col lg:flex-row">
+  <div class="flex p-8 md:p-24 bg-cover bg-center w-full h-full"
+       style="background-image: url('https://images.unsplash.com/photo-1611095780122-d692cee29291?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80')">
+    <div class="w-fit h-fit p-4 rounded-lg bg-white">
+      <div>
+        <img src="/assets/logos/logo-brand.png" alt="brand check-id" class="h-6 w-20">
+      </div>
+    </div>
+  </div>
+  <div class="w-full flex flex-col gap-8 p-8 md:p-24 h-fit lg:h-full lg:justify-center lg:max-w-[800px]">
+    <div class="w-full flex flex-col gap-2 h-fit">
+      <span class="t-title text-zc-800">Hola!</span>
+      <span class="t-body text-zc-400">
+        Ingresa tus credenciales para comenzar con esta nueva experiencia de enrolamiento y validación de identidad.
+      </span>
+    </div>
+    <form [formGroup]="formLogin" class="w-full space-y-2 flex flex-col h-fit items-end">
+      <div class="w-full grid md:grid-cols-2 gap-2">
+        <div class="i-outline w-full">
+          <label>Correo electrónico</label>
+          <input type="email" formControlName="email" (change)="verifyChangeValueEmailField()">
+          <small class="text-alert-error" *ngIf="emailField.invalid && emailField.touched && emailField.hasError('required')">
+            El correo electrónico es requerido
+          </small>
+          <small class="text-alert-error" *ngIf="emailField.invalid && emailField.touched && emailField.hasError('email')">
+            Debe de ingresar un correo electronico valido
+          </small>
+        </div>
+        <div class="i-outline w-full">
+          <label>Contraseña</label>
+          <input type="password" formControlName="password" (change)="verifyChangeValuePwdField()">
+          <small class="text-alert-error" *ngIf="passwordField.invalid && passwordField.touched && passwordField.hasError('required')">
+            La contraseña es requerida
+          </small>
+        </div>
+        <div class="w-full flex flex-col items-center justify-center">
+          <ngx-recaptcha2
+            [siteKey]="siteKey"
+            [useGlobalDomain]="false"
+            formControlName="recaptcha">
+          </ngx-recaptcha2>
+          <small class="text-alert-error" *ngIf="captchaField?.invalid && captchaField?.touched">
+            El captcha es requerido
+          </small>
+        </div>
+      </div>
+    </form>
+    <div class="flex flex-col space-y-2 items-center">
+      <button class="b-solid w-full" (click)="login()">Ingresar</button>
+    </div>
+  </div>
+</div>
+
+<app-block-page [show]="isBlockPage"></app-block-page>
+<app-toast></app-toast>

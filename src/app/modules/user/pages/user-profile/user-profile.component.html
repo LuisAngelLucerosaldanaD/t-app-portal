@@ -1,0 +1,8 @@
+<div class='body-container'>
+  <app-header></app-header>
+  <div *ngIf="user" class='md-container-main md-container-layout'>
+    <app-profile [user]="user" [tracking]="tracking"></app-profile>
+  </div>
+  <app-footer></app-footer>
+</div>
+<app-block-page [show]="blockPage"></app-block-page>

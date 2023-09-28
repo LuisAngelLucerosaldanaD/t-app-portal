@@ -1,0 +1,43 @@
+<div class="container-header">
+  <header class="md-container md-header">
+    <div class="hdr-left">
+      <div class="w-32">
+        <img src="assets/logos/logo-brand.png" alt="CHECK-ID"/>
+      </div>
+      <div class='h-4 border-l-2 border-st-2'></div>
+      <nav class="md-nav">
+        <ng-template [ngIf]="role === 'user'" [ngIfElse]="admin">
+          <button routerLink="/user" class="{{getStyleUrl('/user', false)}}">
+            Inicio
+          </button>
+          <button routerLink="/user/validation/selfie" class="{{getStyleUrl('validation', true)}}">
+            Validar Cuenta
+          </button>
+        </ng-template>
+        <ng-template #admin>
+          <button routerLink="/admin/dashboard" class="{{getStyleUrl('admin', false)}}">
+            Tablero de Control
+          </button>
+          <button routerLink="/admin/clients" class="{{getStyleUrl('admin', false)}}">
+            Clientes
+          </button>
+        </ng-template>
+      </nav>
+    </div>
+    <div class="hdr-right">
+      <button *ngIf="role === 'admin'" routerLink="/admin/profile" class="b-small h-8">
+        <i class="pi pi-user" style="font-size: 1rem"></i>
+        Perfíl
+      </button>
+      <button *ngIf="role === 'user'" routerLink="/user" class="b-small h-8">
+        <i class="pi pi-user" style="font-size: 1rem"></i>
+        Perfíl
+      </button>
+      <button class='b-small h-8' title='Cerrar Sesión'
+              (click)="handlerLogout()">
+        <i class="pi pi-times" style="font-size: 1rem"></i>
+        <span>Cerrar Sesión</span>
+      </button>
+    </div>
+  </header>
+</div>

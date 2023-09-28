@@ -1,0 +1,42 @@
+
+.md-container-activity {
+  @apply lg:w-96 h-[696px] p-6 space-y-6 flex flex-col;
+}
+
+.md-card-list-notify {
+  @apply bg-st-5 rounded-lg flex-1 overflow-y-auto p-6;
+}
+
+.md-card-history {
+  @apply w-full space-y-4;
+}
+
+.md-card-history .md-history {
+  @apply rounded-b-2xl space-y-1 rounded-r-2xl bg-white-p flex flex-col drop-shadow border border-st-20 p-2 w-fit max-w-full;
+}
+
+.md-history-tag {
+  @apply t-overline-b;
+}
+.md-history-text {
+  @apply t-body text-st-90;
+}
+.md-history-date {
+  @apply t-overline text-st-60;
+}
+
+.text-trx-info {
+  @apply text-alert-info;
+}
+
+.text-trx-warning {
+  @apply text-alert-warning;
+}
+
+.text-trx-success {
+  @apply text-alert-success;
+}
+
+.text-trx-error {
+  @apply text-alert-error;
+}

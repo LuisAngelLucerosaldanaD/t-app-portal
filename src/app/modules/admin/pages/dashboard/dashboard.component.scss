@@ -1,0 +1,19 @@
+.md-dashboard-container {
+  @apply space-y-12
+}
+
+.md-card-dash {
+  @apply flex flex-col md:flex-row md:h-16 py-4 px-5 gap-2 items-center justify-center;
+}
+
+.md-card-dash .md-card-dash-icon {
+  @apply text-alert-warning w-8 h-8
+}
+
+.md-card-dash .md-card-dash-label {
+  @apply t-body text-st-60;
+}
+
+.md-card-dash .md-card-dash-value {
+  @apply t-title text-st-90;
+}

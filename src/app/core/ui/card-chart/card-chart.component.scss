@@ -1,0 +1,27 @@
+.md-card-chart-container {
+  @apply border-4 rounded-lg md:h-40 w-full lg:flex-1 flex md:flex-col gap-2 md:gap-1 items-center justify-center p-4 whitespace-nowrap;
+}
+
+.md-card-chart-container .md-card-chart-label {
+  @apply t-body text-st-60;
+}
+
+.md-card-chart-container .md-card-chart-value {
+  @apply t-title text-st-90;
+}
+
+.border-card-warning {
+  @apply border-alert-warning;
+}
+
+.border-card-info {
+  @apply border-alert-info;
+}
+
+.border-card-success {
+  @apply border-alert-success;
+}
+
+.border-card-error {
+  @apply border-alert-error;
+}

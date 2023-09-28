@@ -1,0 +1,11 @@
+.md-footer {
+  @apply flex items-center space-x-4 justify-between overflow-x-auto w-full h-16;
+}
+
+.container-footer {
+  @apply w-full;
+}
+
+.md-footer {
+  @apply t-subtitle text-st-40
+}

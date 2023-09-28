@@ -1,1 +1,227 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import "primeicons/primeicons.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  :root {
+    --c-white-p: #FFFFFF;
+    --c-black-p: #212121;
+
+    --c-brand-d-3: #001133;
+    --c-brand-d-2: #002266;
+    --c-brand-d-1: #003399;
+    --c-brand-c: #0044CC;
+    --c-brand-l-1: #0055FF;
+    --c-brand-l-2: #3377FF;
+    --c-brand-l-3: #6699FF;
+
+    --c-slate-5: #F8FAFC;
+    --c-slate-20: #E2E8F0;
+    --c-slate-40: #94A3B8;
+    --c-slate-50: #64748B;
+    --c-slate-60: #475569;
+    --c-slate-80: #1E293B;
+    --c-slate-90: #0F172A;
+
+    --c-alert-error-l: #FF666E;
+    --c-alert-success-l: #2ABB54;
+    --c-alert-info-l: #4C8AFF;
+    --c-alert-warning-l: #FFB119;
+    --c-alert-error-d: #DA1E28;
+    --c-alert-success-d: #1C7D38;
+    --c-alert-info-d: #0150E4;
+    --c-alert-warning-d: #FFB119;
+  }
+
+  .theme-light {
+    --c-fl-brand-d-3: var(--c-brand-d-3);
+    --c-fl-brand-d-2: var(--c-brand-d-2);
+    --c-fl-brand-d-1: var(--c-brand-d-1);
+    --c-fl-brand-c: var(--c-brand-c);
+    --c-fl-brand-l-1: var(--c-brand-l-1);
+    --c-fl-brand-l-2: var(--c-brand-l-2);
+    --c-fl-brand-l-3: var(--c-brand-l-3);
+
+    --c-fl-black: var(--c-slate-90);
+    --c-fl-white: var(--c-slate-5);
+
+    --c-fx-black: var(--c-slate-90);
+    --c-fx-white: var(--c-slate-5);
+
+    --c-fl-slate-5: var(--c-slate-5);
+    --c-fl-slate-20: var(--c-slate-20);
+    --c-fl-slate-40: var(--c-slate-40);
+    --c-fl-slate-50: var(--c-slate-50);
+    --c-fl-slate-60: var(--c-slate-60);
+    --c-fl-slate-80: var(--c-slate-80);
+    --c-fl-slate-90: var(--c-slate-90);
+
+    --c-fl-alert-error: var(--c-alert-error-d);
+    --c-fl-alert-success: var(--c-alert-success-d);
+    --c-fl-alert-info: var(--c-alert-info-d);
+    --c-fl-alert-warning: var(--c-alert-warning-d);
+  }
+}
+
+@layer utilities {
+  .theme-dark {
+    --c-fl-brand-d-3: var(--c-brand-l-3);
+    --c-fl-brand-d-2: var(--c-brand-l-2);
+    --c-fl-brand-d-1: var(--c-brand-l-1);
+    --c-fl-brand-c: var(--c-brand-c);
+    --c-fl-brand-l-1: var(--c-brand-d-1);
+    --c-fl-brand-l-2: var(--c-brand-d-2);
+    --c-fl-brand-l-3: var(--c-brand-d-3);
+
+    --c-fl-black: var(--c-slate-5);
+    --c-fl-white: var(--c-slate-90);
+
+    --c-fx-black: var(--c-slate-90);
+    --c-fx-white: var(--c-slate-5);
+
+    --c-fl-slate-5: var(--c-slate-90);
+    --c-fl-slate-20: var(--c-slate-80);
+    --c-fl-slate-40: var(--c-slate-60);
+    --c-fl-slate-50: var(--c-slate-50);
+    --c-fl-slate-60: var(--c-slate-40);
+    --c-fl-slate-80: var(--c-slate-20);
+    --c-fl-slate-90: var(--c-slate-5);
+
+    --c-fl-alert-error: var(--c-alert-error-l);
+    --c-fl-alert-success: var(--c-alert-success-l);
+    --c-fl-alert-info: var(--c-alert-info-l);
+    --c-fl-alert-warning: var(--c-alert-warning-l);
+  }
+}
+
+svg {
+  @apply fill-current;
+}
+
+button {
+  @apply select-none
+}
+
+.md-card-default {
+  @apply bg-white-p rounded-lg border-2 border-st-20
+}
+
+.body-container {
+  @apply h-screen overflow-y-auto w-full;
+}
+
+.md-container {
+  @apply mx-auto px-6 ;
+  max-width: 1400px;
+}
+
+.md-container-main {
+  @apply mx-auto px-6 py-6 lg:py-12;
+  max-width: 1400px;
+}
+
+.md-container-layout {
+  @apply w-full;
+  min-height: calc(100vh - 130px);
+}
+
+.b-solid, .b-outline, .b-ghost, .b-small {
+  @apply flex items-center gap-1 justify-center;
+}
+
+.b-solid, .b-outline, .b-ghost, .b-small {
+  @apply hover:bg-st-20 hover:text-st-90 hover:border hover:border-st-40 rounded px-4 active:bg-d-1 focus:outline-none focus:ring-2 focus:ring-d-1 disabled:bg-st-20 disabled:text-st-40 disabled:border-none;
+}
+
+.b-solid {
+  @apply bg-c text-white-fx t-body;
+  min-height: 40px;
+}
+.b-outline {
+  @apply border border-c text-st-90 t-body;
+  min-height: 40px;
+}
+.b-ghost {
+  @apply text-st-90 t-body;
+  min-height: 40px;
+}
+
+.b-small {
+  @apply bg-white-p py-1 px-2 t-label-b border border-st-40 text-st-60;
+}
+
+
+@layer components {
+
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Mulish:ital@0;1&display=swap');
+
+  .t-title {
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+  }
+  .t-subtitle {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .t-body {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .t-body-b {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+  }
+  .t-label {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+  }
+  .t-label-b {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 12px;
+  }
+
+  .i-outline {
+    @apply border border-st-20 rounded-lg flex flex-col p-3;
+    label {
+      @apply t-label text-st-40;
+    }
+    input, select {
+      @apply t-body text-black outline-none placeholder-st-20 h-10;
+    }
+    textarea {
+      @apply t-body text-black outline-none placeholder-st-20;
+    }
+    span {
+      @apply text-alert-error t-label;
+    }
+  }
+
+}
+
+/*Global Styles*/
+input {
+  background: transparent;
+}

@@ -1,0 +1,47 @@
+<div class='md-table-container md-card-default p-6 overflow-x-auto'>
+  <table class='md-table-default'>
+    <thead class='text-c t-label-b'>
+    <tr>
+      <td></td>
+      <td>Email</td>
+      <td>Nombre</td>
+      <td>Última actualización</td>
+      <td>Estado</td>
+      <td>Proceso</td>
+      <td>Id de Solicitud</td>
+      <td>Id del cliente</td>
+    </tr>
+    </thead>
+    <tbody class='t-body text-st-90'>
+    <tr *ngFor="let item of data">
+      <td>
+        <button [routerLink]="['/admin/person', item.user.id]" class="b-small">
+          Ver
+        </button>
+      </td>
+      <td>{{item.user.email}}</td>
+      <ng-template
+        [ngIf]="item.user.first_name || item.user.second_name || item.user.first_surname || item.user.second_surname"
+        [ngIfElse]="noName">
+        <td>
+          {{((item.user.first_name || '') + " " + (item.user.second_name || '') + " " + (item.user.first_surname || '') + " " + (item.user.second_surname || '')).trim()}}
+        </td>
+      </ng-template>
+      <ng-template #noName>
+        <td>
+          El usuario aun no ha validado su identidad
+        </td>
+      </ng-template>
+      <td>{{item.user.updated_at | date: 'medium': 'UTC'}}</td>
+      <td>
+        <div class={getStyleStatus(item.status)}>
+          <span class='text-st-90'>{{item.status}}</span>
+        </div>
+      </td>
+      <td>{{item.process}}</td>
+      <td>{{item.request_id}}</td>
+      <td>{{item.client_id}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
