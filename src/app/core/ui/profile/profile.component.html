@@ -49,21 +49,7 @@
         </div>
         <div *ngIf="!user.transaction_id && user.process_url !== ''" class="flex flex-col gap-4 items-center justify-center">
           <div class="qrcodeImage">
-            <qrcode
-              [qrdata]="'https://github.com/Cordobo/angularx-qrcode'"
-              [allowEmptyString]="true"
-              [cssClass]="'center'"
-              [colorDark]="'#000000ff'"
-              [colorLight]="'#ffffffff'"
-              [elementType]="'canvas'"
-              [errorCorrectionLevel]="'M'"
-              [imageSrc]="'/assets/favicon.ico'"
-              [imageHeight]="65"
-              [imageWidth]="65"
-              [margin]="4"
-              [scale]="1"
-              [width]="200"
-            ></qrcode>
+            <img [src]="qrURL" alt="url img">
           </div>
           <div class='t-label text-st-60'>
             <span>Link de proceso de enrolamiento</span>

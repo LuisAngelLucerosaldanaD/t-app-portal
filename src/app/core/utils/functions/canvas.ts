@@ -1,3 +1,10 @@
+import QRCodeStyling from "qr-code-styling";
+
+/**
+ * Método que permite recortar un canvas y eliminar los espacios vacios
+ * @param canvas
+ * @constructorMétodo que genera un código QR customizado según la data que se le pase
+ */
 export const TrimCanvas = (canvas: HTMLCanvasElement): HTMLCanvasElement => {
   const trimmedCanvas = document.createElement('canvas');
   trimmedCanvas.width = canvas.width;
@@ -62,4 +69,39 @@ const scanX = (fromLeft: boolean, imgWidth: number, imgHeight: number, imgData: 
     }
   }
   return 0;
+}
+
+/**
+ * Método que genera un código QR customizado según la data que se le pase
+ * @param data Data en formato string
+ * @param height alto de la imagen, por defecto va 300
+ * @param width ancho de la imagen, por defecto va 300
+ */
+export const GenerateQRCode = (data: string, height: number = 300, width: number = 300): Promise<Blob | null> => {
+  const qrCode = new QRCodeStyling({
+    width,
+    height,
+    type: "svg",
+    data: data,
+    image: "/assets/favicon.ico",
+    dotsOptions: {
+      color: "#4267b2",
+      type: "dots"
+    },
+    backgroundOptions: {
+      color: "#ffffff",
+    },
+    imageOptions: {
+      crossOrigin: "anonymous",
+      margin: 20
+    },
+    cornersDotOptions: {
+      type: 'dot'
+    },
+    cornersSquareOptions: {
+      type: 'dot'
+    }
+  });
+
+  return qrCode.getRawData();
 }

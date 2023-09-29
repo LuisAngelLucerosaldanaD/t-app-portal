@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   public isBlockPage: boolean = false;
   private token: string = '';
   public siteKey: string = '';
-  public recaptcha: FormControl = new FormControl('', Validators.required);
   public formLogin: FormGroup;
 
   constructor(
@@ -38,6 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this._subscriptions.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -65,36 +65,6 @@ export class LoginComponent implements OnInit, OnDestroy {
    */
   get captchaField(): AbstractControl {
     return <AbstractControl>this.formLogin.get('recaptcha');
-  }
-
-  /**
-   * Método que valida si ha surgido un cambio en el campo email y actualiza los validadores del campo password
-   */
-  public verifyChangeValueEmailField(): void {
-    if (this.emailField.value.length > 0) {
-      this.passwordField.setValidators(Validators.required);
-      this.passwordField.updateValueAndValidity();
-      return;
-    }
-
-    this.passwordField.clearValidators();
-    this.passwordField.updateValueAndValidity();
-    return;
-  }
-
-  /**
-   * Método que valida si ha surgido un cambio en el campo password y actualiza los validadores del campo email
-   */
-  public verifyChangeValuePwdField(): void {
-    if (this.passwordField.value.length > 0) {
-      this.emailField.setValidators(Validators.required);
-      this.emailField.updateValueAndValidity();
-      return;
-    }
-
-    this.emailField.clearValidators();
-    this.emailField.updateValueAndValidity();
-    return;
   }
 
   /**

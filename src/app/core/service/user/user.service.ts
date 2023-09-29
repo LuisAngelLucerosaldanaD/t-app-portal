@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {EnvServiceFactory} from "@app/core/service/env/env.service.provider";
 import {ResAnny} from "@app/core/models/response";
-import {User} from "@app/core/models/user";
+import {CreateAccount, ResponseOnboarding, User} from "@app/core/models/user";
 import {Traceability} from "@app/core/models/tracking";
 import {Login, Token} from "@app/core/models/token";
 
@@ -17,6 +17,7 @@ export class UserService {
   private readonly urlTrackingUser: string = EnvServiceFactory().REST_API + this.urlApiVersion + 'traceability/';
   private readonly urlUserFile: string = EnvServiceFactory().REST_API + this.urlApiVersion + 'user/file/';
   private readonly urlLogin: string = EnvServiceFactory().REST_API + '/api/v1/user/login';
+  private readonly urlCreateAccount: string = EnvServiceFactory().REST_API + '/api/v1/user/register';
 
   constructor(
     private _httpService: HttpClient
@@ -47,10 +48,18 @@ export class UserService {
 
   /**
    * Método que permite iniciar sesión y obtener un token de autorización
-   * @param data
+   * @param data Datos a enviar qué pertenece al modelo Login
    */
   public login(data: Login): Observable<ResAnny<Token>> {
     return this._httpService.post<ResAnny<Token>>(this.urlLogin, data).pipe((map => map));
+  }
+
+  /**
+   * Método que permite crear una cuenta de un usuario e inciar el proceso de onboarding
+   * @param data Datos a enviar qué pertenece al modelo CreateAccount
+   */
+  public createAccount(data: CreateAccount): Observable<ResAnny<ResponseOnboarding>> {
+    return this._httpService.post<ResAnny<ResponseOnboarding>>(this.urlCreateAccount, data).pipe((map => map));
   }
 
 }

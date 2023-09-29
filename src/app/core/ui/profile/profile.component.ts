@@ -7,6 +7,7 @@ import {UserService} from "@app/core/service/user/user.service";
 import {Subscription} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ToastService} from "@app/core/ui/services/toast/toast.service";
+import {GenerateQRCode} from "@app/core/utils/functions/canvas";
 
 @Component({
   selector: 'app-profile',
@@ -17,13 +18,13 @@ export class ProfileComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() user!: User;
   @Input() userID: string = '';
-  @Input() urlQr: string = '';
   @Input() tracking: Traceability[] = [];
   protected readonly GetFullSrcImg = GetFullSrcImg;
   private _subscription: Subscription = new Subscription();
   protected userSelfie: string = '';
   protected userDocumentFront: string = '';
   protected userDocumentBack: string = '';
+  protected qrURL: string = '';
 
   constructor(
     private _router: Router,
@@ -34,6 +35,11 @@ export class ProfileComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes['user'] && !changes['user'].firstChange) {
+      if (this.user.process_url) {
+        GenerateQRCode(this.user.process_url, 200, 200).then((res) => {
+          if (res) this.qrURL = URL.createObjectURL(res);
+        });
+      }
       this.getUserFiles();
     }
   }
@@ -43,6 +49,11 @@ export class ProfileComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit(): void {
+    if (this.user.process_url) {
+      GenerateQRCode(this.user.process_url, 200, 200).then((res) => {
+        if (res) this.qrURL = URL.createObjectURL(res);
+      });
+    }
     this.getUserFiles();
   }
 
@@ -93,6 +104,11 @@ export class ProfileComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
+  /**
+   * Método que obtiene un archivo de un usuario mendiante el id del archivo y retorna una promesa con la esctrucuta { file: string, error: string | null }
+   * @param fileId id del archivo a obtener en formato UUID
+   * @private
+   */
   private getUserFile(fileId: string): Promise<{ file: string, error: string | null }> {
     return new Promise((resolve) => {
       this._subscription.add(

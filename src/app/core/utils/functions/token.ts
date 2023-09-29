@@ -8,7 +8,7 @@ export const GetTokenMetadata = (token: string): TokenData | null => {
   return null;
 }
 
-export const IsInvalidToken = (token: string): boolean => {
+export const IsTokenExpired = (token: string): boolean => {
   if (token) return helper.isTokenExpired(token);
 
   return true;

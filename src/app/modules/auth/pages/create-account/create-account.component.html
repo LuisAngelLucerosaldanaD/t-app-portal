@@ -1,0 +1,105 @@
+<div class="w-full h-screen flex flex-col lg:flex-row">
+  <div class="flex p-8 md:p-24 bg-cover bg-center w-full h-full"
+       style="background-image: url('https://images.unsplash.com/photo-1611095780122-d692cee29291?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80')">
+    <div class="w-fit h-fit p-4 rounded-lg bg-white">
+      <div>
+        <img src="/assets/logos/logo-brand.png" alt="brand check-id" class="h-6 w-20">
+      </div>
+    </div>
+  </div>
+  <div class="w-full flex flex-col gap-8 p-8 md:p-24 h-fit lg:h-full lg:justify-center lg:max-w-[800px]">
+    <div class="w-full flex flex-col gap-2 h-fit">
+      <span class="t-title text-zc-800">Hola!</span>
+      <span class="t-body text-zc-400" *ngIf="!isCreated">
+        Ingresa los datos basicos para comenzar con esta nueva experiencia de enrolamiento y validación de identidad.
+      </span>
+      <span class="t-body text-zc-400" *ngIf="isCreated">
+        Escanea el código QR con el aplicativo OnlyOne para continuar con el proceso de creación de cuenta
+      </span>
+    </div>
+    <ng-template [ngIf]="isCreated" [ngIfElse]="form">
+      <div class="flex w-full justify-center">
+        <img [src]="urlQR" alt="img qr onboarding">
+      </div>
+      <div class="flex flex-col space-y-2 items-center">
+        <button class="b-ghost w-full" routerLink="/auth/login">Regrsar al incio de sesión</button>
+      </div>
+    </ng-template>
+    <ng-template #form>
+      <form [formGroup]="accountForm" class="w-full space-y-2 flex flex-col h-fit items-end">
+        <div class="w-full grid md:grid-cols-2 gap-2">
+          <div class="i-outline w-full">
+            <label>Número de identificación o cedula</label>
+            <input type="email" formControlName="document_number">
+            <small class="text-alert-error"
+                   *ngIf="accountForm.get('document_number')?.invalid && accountForm.get('document_number')?.touched && accountForm.get('document_number')?.hasError('required')">
+              El número de documento es requerido
+            </small>
+            <small class="text-alert-error"
+                   *ngIf="accountForm.get('document_number')?.invalid && accountForm.get('document_number')?.touched && accountForm.get('document_number')?.hasError('minlength')">
+              El número de documento no debe ser menor a 3 caracteres
+            </small>
+            <small class="text-alert-error"
+                   *ngIf="accountForm.get('document_number')?.invalid && accountForm.get('document_number')?.touched && accountForm.get('document_number')?.hasError('maxlength')">
+              El número de documento no debe ser mayor a 20 caracteres
+            </small>
+          </div>
+          <div class="i-outline w-full">
+            <label>Correo electrónico</label>
+            <input type="email" formControlName="email">
+            <small class="text-alert-error"
+                   *ngIf="accountForm.get('email')?.invalid && accountForm.get('email')?.touched && accountForm.get('email')?.hasError('required')">
+              El correo electrónico es requerido
+            </small>
+            <small class="text-alert-error"
+                   *ngIf="accountForm.get('email')?.invalid && accountForm.get('email')?.touched && accountForm.get('email')?.hasError('email')">
+              Debe de ingresar un correo electronico valido
+            </small>
+          </div>
+          <div class="i-outline w-full">
+            <label>Número de celular</label>
+            <input type="tel" formControlName="cellphone">
+            <small class="text-alert-error"
+                   *ngIf="accountForm.get('cellphone')?.invalid && accountForm.get('cellphone')?.touched && accountForm.get('cellphone')?.hasError('required')">
+              El número de celular es requerido
+            </small>
+            <small class="text-alert-error"
+                   *ngIf="accountForm.get('cellphone')?.invalid && accountForm.get('cellphone')?.touched && accountForm.get('cellphone')?.hasError('minlength')">
+              El número de celular no debe ser menor a 9 caracteres
+            </small>
+            <small class="text-alert-error"
+                   *ngIf="accountForm.get('cellphone')?.invalid && accountForm.get('cellphone')?.touched && accountForm.get('cellphone')?.hasError('maxlength')">
+              El número de celular no debe ser mayor a 15 caracteres
+            </small>
+          </div>
+          <div class="i-outline w-full">
+            <label>Contraseña</label>
+            <input type="password" formControlName="password">
+            <small class="text-alert-error"
+                   *ngIf="accountForm.get('password')?.invalid && accountForm.get('password')?.touched && accountForm.get('password')?.hasError('required')">
+              La contraseña es requerida
+            </small>
+          </div>
+          <div class="w-full flex flex-col items-center justify-center">
+            <ngx-recaptcha2
+              [siteKey]="siteKey"
+              [useGlobalDomain]="false"
+              formControlName="recaptcha">
+            </ngx-recaptcha2>
+            <small class="text-alert-error"
+                   *ngIf="accountForm.get('recaptcha')?.invalid && accountForm.get('recaptcha')?.touched">
+              El captcha es requerido
+            </small>
+          </div>
+        </div>
+      </form>
+      <div class="flex flex-col space-y-2 items-center">
+        <button class="b-solid w-full" (click)="createAccount()">Crear cuenta</button>
+        <button class="b-ghost w-full" routerLink="/auth/login">Cancelar</button>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<app-block-page [show]="isBlockPage"></app-block-page>
+<app-toast></app-toast>

@@ -9,11 +9,14 @@ import {ToastService} from "@app/core/ui/services/toast/toast.service";
 import {NgxCaptchaModule} from "ngx-captcha";
 import {UserService} from "@app/core/service/user/user.service";
 import {HttpClientModule} from "@angular/common/http";
+import { CreateAccountComponent } from './pages/create-account/create-account.component';
+import {QRCodeModule} from "angularx-qrcode";
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    CreateAccountComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +25,8 @@ import {HttpClientModule} from "@angular/common/http";
     UiModule,
     RouterLink,
     NgxCaptchaModule,
-    HttpClientModule
+    HttpClientModule,
+    QRCodeModule
   ],
   providers: [
     ToastService,

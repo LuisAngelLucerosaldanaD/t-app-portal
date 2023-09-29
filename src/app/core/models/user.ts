@@ -34,3 +34,15 @@ export interface User {
   created_at: string;
   updated_at: string;
 }
+
+export interface CreateAccount {
+  document_number: string;
+  email: string;
+  password: string;
+  cellphone: string;
+}
+
+export interface ResponseOnboarding {
+  url: string;
+  method: string;
+}
