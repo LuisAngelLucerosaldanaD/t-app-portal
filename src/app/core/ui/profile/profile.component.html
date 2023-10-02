@@ -14,13 +14,14 @@
               </svg>
             </ng-template>
             <ng-template #selfie>
-              <img src="{{GetFullSrcImg(userSelfie)}}"
+              <img *ngIf="userSelfie !== ''" src="{{GetFullSrcImg(userSelfie)}}"
                    alt="{{user.first_name ? user.first_name + ' ' + user.second_surname : 'user img'}}"
                    class='w-24 h-24'/>
+              <app-loader *ngIf="userSelfie === ''"></app-loader>
             </ng-template>
 
           </div>
-          <app-full-screen [src]="GetFullSrcImg(userSelfie)" *ngIf="user.selfie_img"
+          <app-full-screen [src]="GetFullSrcImg(userSelfie)" *ngIf="user.selfie_img && userSelfie"
                            [name]="user && user.first_name ? user.first_name + ' ' + user.second_surname : 'user selfie'">
           </app-full-screen>
         </div>
@@ -47,7 +48,8 @@
             <span>{{user.email}}</span>
           </div>
         </div>
-        <div *ngIf="!user.transaction_id && user.process_url !== ''" class="flex flex-col gap-4 items-center justify-center">
+        <div *ngIf="!user.transaction_id && user.process_url !== ''"
+             class="flex flex-col gap-4 items-center justify-center">
           <div class="qrcodeImage">
             <img [src]="qrURL" alt="url img">
           </div>
@@ -58,12 +60,12 @@
       </div>
       <div *ngIf="userID && !user.transaction_id" class='flex space-x-6 justify-end items-center'>
         <button
-                class='border-2 t-subtitle bg-white-p border-alert-error text-alert-error h-12 hover:bg-alert-error hover:text-st-5 rounded px-4 disabled:bg-st-20 disabled:text-st-40 disabled:border-none flex items-center gap-1 justify-center'>
+          class='border-2 t-subtitle bg-white-p border-alert-error text-alert-error h-12 hover:bg-alert-error hover:text-st-5 rounded px-4 disabled:bg-st-20 disabled:text-st-40 disabled:border-none flex items-center gap-1 justify-center'>
           <i class="pi pi-times" style="font-size: 1.5rem"></i>
           <span>Rechazar</span>
         </button>
         <button
-                class='border-2 t-subtitle bg-white-p border-alert-success text-alert-success h-12 hover:bg-alert-success hover:text-st-5 rounded px-4 disabled:bg-st-20 disabled:text-st-40 disabled:border-none flex items-center gap-1 justify-center'>
+          class='border-2 t-subtitle bg-white-p border-alert-success text-alert-success h-12 hover:bg-alert-success hover:text-st-5 rounded px-4 disabled:bg-st-20 disabled:text-st-40 disabled:border-none flex items-center gap-1 justify-center'>
           <i class="pi pi-check-circle" style="font-size: 1.5rem"></i>
           <span>Aprobar</span>
         </button>
@@ -76,8 +78,9 @@
           class='card-a md-card-default relative w-80 h-52 text-st-20 flex flex-col items-center justify-center'>
           <div>
             <ng-template [ngIf]="user.front_document_img" [ngIfElse]="documentFront">
-              <img src="{{GetFullSrcImg(userDocumentFront)}}" alt="document front"
+              <img *ngIf="userDocumentFront !== ''" src="{{GetFullSrcImg(userDocumentFront)}}" alt="document front"
                    style="width: 280px; height: 149px"/>
+              <app-loader *ngIf="userDocumentFront === ''"></app-loader>
             </ng-template>
             <ng-template #documentFront>
               <svg class='fill-current' width="230" height="124" viewBox="0 0 230 124"
@@ -103,7 +106,7 @@
               </svg>
             </ng-template>
           </div>
-          <app-full-screen *ngIf="user && user.front_document_img"
+          <app-full-screen *ngIf="user && user.front_document_img && userDocumentFront"
                            [src]="GetFullSrcImg(userDocumentFront)"
                            [name]="user && user.first_name ? user.first_name + ' ' + user.second_surname : 'user document front'">
           </app-full-screen>
@@ -112,8 +115,9 @@
           class='card-b md-card-default relative w-80 h-52 text-st-20 flex flex-col items-center justify-center'>
           <div>
             <ng-template [ngIf]="user.back_document_img" [ngIfElse]="documentBack">
-              <img src="{{GetFullSrcImg(user.back_document_img || '')}}" alt="document back"
+              <img *ngIf="userDocumentBack !== ''" src="{{GetFullSrcImg(userDocumentBack)}}" alt="document back"
                    style="width: 280px; height: 149px"/>
+              <app-loader *ngIf="userDocumentBack === ''"></app-loader>
             </ng-template>
             <ng-template #documentBack>
               <svg class='fill-current' width="280" height="149" viewBox="0 0 280 149"
@@ -142,7 +146,7 @@
               </svg>
             </ng-template>
           </div>
-          <app-full-screen *ngIf="user && user.back_document_img" [src]="GetFullSrcImg(user.back_document_img || '')"
+          <app-full-screen *ngIf="user && user.back_document_img && userDocumentBack" [src]="GetFullSrcImg(userDocumentBack)"
                            [name]="user && user.first_name ? user.first_name + ' ' + user.second_surname : 'user document back'">
           </app-full-screen>
         </div>

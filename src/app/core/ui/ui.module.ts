@@ -13,6 +13,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {ActivityHistoryComponent} from './activity-history/activity-history.component';
 import {FullScreenComponent} from './full-screen/full-screen.component';
 import {QRCodeModule} from "angularx-qrcode";
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {QRCodeModule} from "angularx-qrcode";
     ProfileComponent,
     ActivityHistoryComponent,
     FullScreenComponent,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,

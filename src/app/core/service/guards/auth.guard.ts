@@ -4,7 +4,7 @@ import {GetTokenMetadata, IsTokenExpired} from "@app/core/utils/functions/token"
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-  const role = route.data['role'];
+  const role: string[] = route.data['role'];
 
   const token = sessionStorage.getItem('access_token');
   if (!token) {
@@ -27,10 +27,8 @@ export const authGuard: CanActivateFn = (route, state) => {
     return false;
   }
 
-  if (role !== tokenData.rol) {
-    router.navigateByUrl('/auth/login');
-    return false;
-  }
+  if (role.includes(tokenData.rol)) return true;
 
-  return true;
+  router.navigateByUrl('/auth/login');
+  return false;
 };

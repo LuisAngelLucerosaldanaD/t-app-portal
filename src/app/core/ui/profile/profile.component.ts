@@ -35,12 +35,7 @@ export class ProfileComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes['user'] && !changes['user'].firstChange) {
-      if (this.user.process_url) {
-        GenerateQRCode(this.user.process_url, 200, 200).then((res) => {
-          if (res) this.qrURL = URL.createObjectURL(res);
-        });
-      }
-      this.getUserFiles();
+      this.initData();
     }
   }
 
@@ -49,6 +44,14 @@ export class ProfileComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit(): void {
+    this.initData();
+  }
+
+  /**
+   * Método que inciar los valores que deben de ejecuartarse despues de hacer el renderizado del HTML
+   * @private
+   */
+  private initData(): void {
     if (this.user.process_url) {
       GenerateQRCode(this.user.process_url, 200, 200).then((res) => {
         if (res) this.qrURL = URL.createObjectURL(res);
@@ -82,6 +85,18 @@ export class ProfileComponent implements OnInit, OnDestroy, OnChanges {
           }
 
           this.userDocumentFront = res.file;
+          return;
+        });
+      }
+
+      if (this.user.back_document_img) {
+        this.getUserFile(this.user.back_document_img).then((res) => {
+          if (typeof res.error === 'string') {
+            this._messageService.add({type: 'error', message: res.error});
+            return;
+          }
+
+          this.userDocumentBack = res.file;
           return;
         });
       }
