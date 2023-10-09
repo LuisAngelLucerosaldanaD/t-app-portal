@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.formLogin = this._fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      recaptcha: ['', Validators.required]
+      recaptcha: ['', this.siteKey !== '' ? Validators.required : []]
     });
   }
 
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Método que permite iniciar sesión
+   * Método que permite iniciar sesión por correo y contraseña
    */
   public login(): void {
 
@@ -114,7 +114,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Método que permite verificar el rol del usuario que ha iniciado sesión por Oauth
+   * Método que permite verificar el rol del usuario que ha iniciado sesión
    * @private
    */
   private validatePermissions() {

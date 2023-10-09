@@ -1,5 +1,8 @@
-import { EnvService } from './env.service';
+import {EnvService} from './env.service';
 
+/**
+ * Método que permite obtener las instancias de las variables de entorno del sistema
+ */
 export const EnvServiceFactory = () => {
   const env: any = new EnvService();
 
@@ -16,6 +19,9 @@ export const EnvServiceFactory = () => {
   return env;
 };
 
+/**
+ * Constante que nos permite obtener el listado de variables de entorno
+ */
 export const EnvServiceProvider = {
   provide: EnvService,
   useFactory: EnvServiceFactory,

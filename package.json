@@ -1,12 +1,15 @@
 {
   "name": "check-id-app",
-  "version": "0.0.0",
+  "version": "0.1.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "compodoc:build": "compodoc -p tsconfig.doc.json",
+    "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
+    "compodoc:serve": "compodoc -s"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +24,7 @@
     "@auth0/angular-jwt": "^5.1.2",
     "angularx-qrcode": "^16.0.1",
     "ionicons": "^7.1.2",
+    "jsdoc": "^4.0.2",
     "ngx-captcha": "^13.0.0",
     "postcss": "^8.4.28",
     "primeicons": "^6.0.1",
@@ -34,6 +38,8 @@
     "@angular-devkit/build-angular": "^16.2.0",
     "@angular/cli": "~16.2.0",
     "@angular/compiler-cli": "^16.2.0",
+    "@babel/plugin-proposal-private-methods": "^7.18.6",
+    "@compodoc/compodoc": "^1.1.21",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",

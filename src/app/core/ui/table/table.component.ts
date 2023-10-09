@@ -1,5 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {UserStatus} from "@app/core/models/table";
 import {Work} from "@app/core/models/dashboard";
 
 @Component({

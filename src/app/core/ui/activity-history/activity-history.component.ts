@@ -6,16 +6,10 @@ import {Traceability} from "@app/core/models/tracking";
   templateUrl: './activity-history.component.html',
   styleUrls: ['./activity-history.component.scss']
 })
-export class ActivityHistoryComponent implements OnInit {
+export class ActivityHistoryComponent {
 
   @Input() tracking: Traceability[] = [];
 
   public readonly currentDate: Date = new Date();
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
 
 }

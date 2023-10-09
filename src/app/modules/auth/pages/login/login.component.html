@@ -19,21 +19,24 @@
         <div class="i-outline w-full">
           <label>Correo electrónico</label>
           <input type="email" formControlName="email">
-          <small class="text-alert-error" *ngIf="emailField.invalid && emailField.touched && emailField.hasError('required')">
+          <small class="text-alert-error"
+                 *ngIf="emailField.invalid && emailField.touched && emailField.hasError('required')">
             El correo electrónico es requerido
           </small>
-          <small class="text-alert-error" *ngIf="emailField.invalid && emailField.touched && emailField.hasError('email')">
+          <small class="text-alert-error"
+                 *ngIf="emailField.invalid && emailField.touched && emailField.hasError('email')">
             Debe de ingresar un correo electronico valido
           </small>
         </div>
         <div class="i-outline w-full">
           <label>Contraseña</label>
           <input type="password" formControlName="password">
-          <small class="text-alert-error" *ngIf="passwordField.invalid && passwordField.touched && passwordField.hasError('required')">
+          <small class="text-alert-error"
+                 *ngIf="passwordField.invalid && passwordField.touched && passwordField.hasError('required')">
             La contraseña es requerida
           </small>
         </div>
-        <div class="w-full flex flex-col items-center justify-center">
+        <div class="w-full flex flex-col items-center justify-center" *ngIf="siteKey !== ''">
           <ngx-recaptcha2
             [siteKey]="siteKey"
             [useGlobalDomain]="false"

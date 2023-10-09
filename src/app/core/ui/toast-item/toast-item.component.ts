@@ -6,7 +6,6 @@ import {
   Input,
   NgZone,
   OnDestroy,
-  OnInit,
   Output
 } from '@angular/core';
 import {Message} from "@app/core/models/toast";
@@ -43,7 +42,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
     ])
   ],
 })
-export class ToastItemComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ToastItemComponent implements AfterViewInit, OnDestroy {
 
   @Input() message!: Message;
   @Input() index: number = -1;
@@ -59,9 +58,6 @@ export class ToastItemComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
   }
 
-  ngOnInit(): void {
-  }
-
   ngAfterViewInit(): void {
     this.initTimeout();
   }
@@ -70,6 +66,10 @@ export class ToastItemComponent implements OnInit, AfterViewInit, OnDestroy {
     this.clearTimeout();
   }
 
+  /**
+   * Método que limpia el contador de vida del item toast
+   * @private
+   */
   private clearTimeout(): void {
     if (this.timeout) {
       clearTimeout(this.timeout);
@@ -77,14 +77,24 @@ export class ToastItemComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  /**
+   * Método que limpiar el contador cuando el usaurio da click en el item toast
+   */
   public onMouseEnter(): void {
     this.clearTimeout();
   }
 
+  /**
+   * Método que reinicia el contador cuando el usaurio tenga el mouse sobre el item toast
+   */
   public onMouseLeave(): void {
     this.initTimeout();
   }
 
+  /**
+   * Método que inicia el contador para eliminar el toast del listado de toasts
+   * @private
+   */
   private initTimeout(): void {
     this.zone.runOutsideAngular(() => {
       this.timeout = setTimeout(() => {

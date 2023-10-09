@@ -22,6 +22,11 @@ export class HeaderComponent implements OnInit {
     this.validatePermissions();
   }
 
+  /**
+   * Metodo que permite obtener el estilo según la ruta
+   * @param {string} route
+   * @param {boolean} isSub
+   */
   public getStyleUrl(route: string, isSub: boolean): string {
     if (!isSub) {
       if (location.pathname === route) return 't-body-b text-st-90';
@@ -33,12 +38,18 @@ export class HeaderComponent implements OnInit {
     return 't-body text-st-60';
   }
 
+  /**
+   * Método que permite cerrar sesión
+   */
   public handlerLogout(): void {
     sessionStorage.clear();
     this._router.navigateByUrl('/auth/login')
   }
 
-
+  /**
+   * Método que permite validar el rol del usuario
+   * @private
+   */
   private validatePermissions() {
     const claims = GetTokenMetadata(this.token);
     if (claims && claims.rol && claims.rol !== 'admin') {

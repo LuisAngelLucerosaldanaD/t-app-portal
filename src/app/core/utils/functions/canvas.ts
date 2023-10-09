@@ -35,6 +35,13 @@ export const TrimCanvas = (canvas: HTMLCanvasElement): HTMLCanvasElement => {
   return trimmedCanvas;
 }
 
+/**
+ * Método que permite tener los valores RGBA de una imagen
+ * @param {number} x
+ * @param {number} y
+ * @param {number} imgWidth
+ * @param {Uint8ClampedArray} imgData
+ */
 const getRGBA = (x: number, y: number, imgWidth: number, imgData: Uint8ClampedArray) => {
   return {
     red: imgData[(imgWidth * y + x) * 4],
@@ -44,8 +51,22 @@ const getRGBA = (x: number, y: number, imgWidth: number, imgData: Uint8ClampedAr
   }
 }
 
+/**
+ * Método que permite tener el valor alpha de una imagen
+ * @param {number} x
+ * @param {number} y
+ * @param {number} imgWidth
+ * @param {Uint8ClampedArray} imgData
+ */
 const getAlpha = (x: number, y: number, imgWidth: number, imgData: Uint8ClampedArray) => getRGBA(x, y, imgWidth, imgData).alpha;
 
+/**
+ * Método que nos permite evaluar los colores de una imagen en la escala Y
+ * @param {boolean} fromTop
+ * @param {number} imgWidth
+ * @param {number} imgHeight
+ * @param {Uint8ClampedArray} imgData
+ */
 const scanY = (fromTop: boolean, imgWidth: number, imgHeight: number, imgData: Uint8ClampedArray) => {
   const offset = fromTop ? 1 : -1
   const firstCol = fromTop ? 0 : imgHeight - 1
@@ -58,6 +79,13 @@ const scanY = (fromTop: boolean, imgWidth: number, imgHeight: number, imgData: U
   return 0;
 }
 
+/**
+ * Método que nos permite evaluar los colores de una imagen en la escala X
+ * @param {boolean} fromLeft
+ * @param {number} imgWidth
+ * @param {number} imgHeight
+ * @param {Uint8ClampedArray} imgData
+ */
 const scanX = (fromLeft: boolean, imgWidth: number, imgHeight: number, imgData: Uint8ClampedArray) => {
   const offset = fromLeft ? 1 : -1
   const firstRow = fromLeft ? 0 : imgWidth - 1

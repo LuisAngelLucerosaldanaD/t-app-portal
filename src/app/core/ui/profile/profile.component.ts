@@ -121,7 +121,7 @@ export class ProfileComponent implements OnInit, OnDestroy, OnChanges {
 
   /**
    * Método que obtiene un archivo de un usuario mendiante el id del archivo y retorna una promesa con la esctrucuta { file: string, error: string | null }
-   * @param fileId id del archivo a obtener en formato UUID
+   * @param {string} fileId id del archivo a obtener en formato UUID
    * @private
    */
   private getUserFile(fileId: string): Promise<{ file: string, error: string | null }> {
@@ -154,6 +154,5 @@ export class ProfileComponent implements OnInit, OnDestroy, OnChanges {
       );
     });
   }
-
 
 }

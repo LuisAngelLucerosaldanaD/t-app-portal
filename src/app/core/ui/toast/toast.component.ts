@@ -4,7 +4,6 @@ import {
   Component, ElementRef,
   EventEmitter,
   Input,
-  OnInit,
   Output, ViewChild
 } from '@angular/core';
 import {ToastService} from "@app/core/ui/services/toast/toast.service";
@@ -17,7 +16,7 @@ import {Message, ToastCloseEvent} from "@app/core/models/toast";
   styleUrls: ['./toast.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ToastComponent implements OnInit {
+export class ToastComponent {
 
   @Input() preventDuplicates: boolean = false;
   @Input() preventOpenDuplicates: boolean = false;
@@ -68,10 +67,11 @@ export class ToastComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-
-  }
-
+  /**
+   * Método que permite agregar un listado de items toast al listado de items toast
+   * @param {Message[]} messages
+   * @private
+   */
   private add(messages: Message[]): void {
     this.messages = this.messages ? [...this.messages, ...messages] : [...messages];
 
@@ -82,6 +82,11 @@ export class ToastComponent implements OnInit {
     this.cd.markForCheck();
   }
 
+  /**
+   * Método que valida si un item toast se puede agregar al listado de items toast
+   * @param {Message} message
+   * @private
+   */
   private canAdd(message: Message): boolean {
     let allow = this.key === message.key;
 
@@ -96,11 +101,21 @@ export class ToastComponent implements OnInit {
     return allow;
   }
 
+  /**
+   * Método que valida si ese item que se esta agregando ya esta agregado
+   * @param {Message[]} collection
+   * @param {Message} message
+   * @private
+   */
   private containsMessage(collection: Message[], message: Message): boolean {
     if (!collection) return false;
     return collection.find((m) => m.type === message.type && m.message == message.message) != null;
   }
 
+  /**
+   * Método que eliminar un item toast del listado de items toast por su indice en el listado
+   * @param {number} index
+   */
   public onMessageClose(index: number): void {
     this.messages?.splice(index, 1);
 

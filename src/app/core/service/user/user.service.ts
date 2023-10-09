@@ -39,8 +39,8 @@ export class UserService {
   }
 
   /**
-   * Métood que permite obtener un archivo relacionado a un usuario por el id del archivo desde el gestor de archivos
-   * @param fileId
+   * Método que permite obtener un archivo relacionado a un usuario por el id del archivo desde el gestor de archivos
+   * @param {string} fileId
    */
   public getUserFile(fileId: string): Observable<ResAnny<string>> {
     return this._httpService.get<ResAnny<string>>(this.urlUserFile + fileId).pipe((map => map));
@@ -48,7 +48,14 @@ export class UserService {
 
   /**
    * Método que permite iniciar sesión y obtener un token de autorización
-   * @param data Datos a enviar qué pertenece al modelo Login
+   * @param {Login} data Datos a enviar qué pertenece al modelo Login
+   * @example
+   *  private _userService = inject(UserService);
+   *  const data = {
+   *    email: 'joe.dow@bjungle.net'
+   *    password: 'password'
+   *  }
+   *  this._userService.login(data);
    */
   public login(data: Login): Observable<ResAnny<Token>> {
     return this._httpService.post<ResAnny<Token>>(this.urlLogin, data).pipe((map => map));
@@ -56,7 +63,16 @@ export class UserService {
 
   /**
    * Método que permite crear una cuenta de un usuario e inciar el proceso de onboarding
-   * @param data Datos a enviar qué pertenece al modelo CreateAccount
+   * @param {CreateAccount} data Datos a enviar qué pertenece al modelo CreateAccount
+   * @example
+   *  private _userService = inject(UserService);
+   *  const data = {
+   *    document_number: "123456789",
+   *    email: "joe.dow@bjungle.net",
+   *    password: "password",
+   *    cellphone: "123456789"
+   *  }
+   *  this._userService.createAccount(data);
    */
   public createAccount(data: CreateAccount): Observable<ResAnny<ResponseOnboarding>> {
     return this._httpService.post<ResAnny<ResponseOnboarding>>(this.urlCreateAccount, data).pipe((map => map));

@@ -1,8 +1,13 @@
-import {CanActivateFn, Router} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot} from '@angular/router';
 import {inject} from "@angular/core";
 import {GetTokenMetadata, IsTokenExpired} from "@app/core/utils/functions/token";
 
-export const authGuard: CanActivateFn = (route, state) => {
+/**
+ * Método que permite validar la sessión y el rol del usuario antes de redirigirlo a la url o recurso solicitado
+ * @param {ActivatedRouteSnapshot} route
+ * @param {RouterStateSnapshot} state
+ */
+export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const router = inject(Router);
   const role: string[] = route.data['role'];
 
