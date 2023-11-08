@@ -1,0 +1,4 @@
+<button (click)="startCamera()">Iniciar Cámara y Detección</button>
+<video #videoElement width="640" height="480" autoplay *ngIf="cameraStarted"></video>
+<img #capturedImage *ngIf="imageSrc" [src]="imageSrc" alt="Captured Smile" />
+

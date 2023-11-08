@@ -6,11 +6,13 @@ import {UserRoutingModule} from "@app/modules/user/user-routing.module";
 import {UserService} from "@app/core/service/user/user.service";
 import {HttpClientModule} from "@angular/common/http";
 import {ToastService} from "@app/core/ui/services/toast/toast.service";
+import { ValidationComponent } from './pages/validation/validation.component';
 
 
 @NgModule({
   declarations: [
-    UserProfileComponent
+    UserProfileComponent,
+    ValidationComponent
   ],
   imports: [
     CommonModule,
